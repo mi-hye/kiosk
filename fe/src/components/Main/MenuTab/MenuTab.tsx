@@ -1,27 +1,22 @@
 import { useState } from "react";
 import TabButton from "./TabButton";
 
-const MENU = [
-	"신메뉴",
-	"커피",
-	"라떼",
-	"에이드",
-	"티",
-	"프라페",
-];
+const MENU = ["커피", "에이드", "티", "스무디"];
 
 function MenuTab() {
-	const [isSelected, setIsSelected] = useState(false);
-
-	const handleSelected = () => setIsSelected(!isSelected);
-
+	const [category, setCategory] = useState("커피");
 	return (
 		<div
 			className="w-full flex items-end text-sm"
 			role="tablist"
 		>
 			{MENU.map((menu, i) => (
-				<TabButton menu={menu} key={i} />
+				<TabButton
+					menu={menu}
+					key={i}
+					category={category}
+					setCategory={setCategory}
+				/>
 			))}
 		</div>
 	);

@@ -1,14 +1,22 @@
 interface PropsType {
 	menu: string;
+	category: string;
+	setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function TabButton({ menu }: PropsType) {
+function TabButton({
+	menu,
+	category,
+	setCategory,
+}: PropsType) {
+	const handleSelected = () => setCategory(menu);
 	return (
 		<button
-			className="border-[1px] border-b-0 border-color-sub p-1.5 rounded-t-md "
+			className={`transition-colors border-[1px] border-b-0 border-r-0 border-color-sub p-1.5 rounded-t-md ${
+				category === menu ? "bg-color-sub text-white" : ""
+			} ${menu === "스무디" ? "border-r-[1px]" : ""}`}
 			role="tab"
-			aria-selected="true"
-			aria-controls="panel1"
+			onClick={handleSelected}
 		>
 			{menu}
 		</button>
