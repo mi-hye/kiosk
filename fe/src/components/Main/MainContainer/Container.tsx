@@ -1,13 +1,13 @@
-import Menu from "./Menu";
+import MenuContainer from "./MenuContainer";
 import MenuBottom from "./MenuBottom";
 
-function MenuContainer() {
+function Container() {
 	return (
 		<div className="w-full h-[93%] border-[1px] border-color-sub rounded-b-md rounded-tr-md">
-			<Menu />
+			<MenuContainer />
 			<MenuBottom />
 		</div>
 	);
 }
 
-export default MenuContainer;
+export default Container;
