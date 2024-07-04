@@ -4,12 +4,19 @@ import {
 } from "@tanstack/react-query";
 import fetchData from "../utility/fetchData";
 
-interface ResponseType {
-	[key: string]: number | string;
+interface FormValues {
+	name: string;
+	explainText: string;
+	price: string;
+	tab: string;
 }
 
-type DataType = ResponseType;
-type Handler = (data?: ResponseType) => void;
+interface ResponseType {
+	[key: string]: string;
+}
+
+type DataType = ResponseType | FormValues;
+type Handler = (data: ResponseType) => void;
 
 const usePost = (
 	query: string,
@@ -19,7 +26,10 @@ const usePost = (
 	const queryClient = useQueryClient();
 	const { mutate } = useMutation({
 		mutationFn: (data: DataType) =>
-			fetchData(query, { method: "POST", body: data }),
+			fetchData(query, {
+				method: "POST",
+				body: data,
+			}),
 		onSuccess: (data) => {
 			if (handler) handler(data);
 			queryClient.invalidateQueries({
