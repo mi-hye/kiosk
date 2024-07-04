@@ -5,6 +5,7 @@ import {
 	QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { CategoryProvider } from "./provider/CategoryProvider";
 
 const queryClient = new QueryClient();
 
@@ -13,8 +14,10 @@ function App() {
 		<QueryClientProvider client={queryClient}>
 			<div className="w-screen h-screen flex-center min-h-[1000px] min-w-[700px]">
 				<div className="w-[740px] h-[1000px] bg-color-main rounded-lg">
-					<Header />
-					<Main />
+					<CategoryProvider>
+						<Header />
+						<Main />
+					</CategoryProvider>
 				</div>
 			</div>
 			<ReactQueryDevtools initialIsOpen={true} />
