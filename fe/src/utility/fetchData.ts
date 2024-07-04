@@ -31,7 +31,6 @@ async function fetchData(
 		);
 		if (!response.ok) throw new Error("에러!!");
 		const data = await response.json();
-		console.log(data); //DELETE
 
 		return data;
 	} catch (err) {
