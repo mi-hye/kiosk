@@ -1,12 +1,20 @@
 import useGet from "../../../../hooks/useGet";
 import Menu from "./Menu";
 
-function MenuContainer() {
+interface PropsType {
+	category: string;
+}
+
+function MenuContainer({ category }: PropsType) {
 	const {
 		data: menus,
 		error,
 		isLoading,
-	} = useGet("menus", "/menus", true);
+	} = useGet(
+		`menus?${category}`,
+		`/menus?${category}`,
+		true
+	);
 
 	if (isLoading) return <div>로딩중</div>;
 	if (error) return <div>Error: {error.message}</div>;
