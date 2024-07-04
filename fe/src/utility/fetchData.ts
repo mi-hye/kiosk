@@ -1,0 +1,43 @@
+const SERVER = process.env.REACT_APP_SERVER;
+type HttpMethod =
+	| "GET"
+	| "POST"
+	| "PUT"
+	| "DELETE"
+	| "PATCH";
+interface FetchDataOptions {
+	method?: HttpMethod;
+	body?: {};
+}
+
+async function fetchData(
+	url: string,
+	options?: FetchDataOptions
+) {
+	const request: RequestInit = {
+		method: options?.method || "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+
+	if (options?.body)
+		request.body = JSON.stringify(options.body);
+
+	try {
+		const response = await fetch(
+			`${SERVER}${url}`,
+			request
+		);
+		if (!response.ok) throw new Error("에러!!");
+		const data = await response.json();
+		console.log(data); //DELETE
+
+		return data;
+	} catch (err) {
+		if (err instanceof Error) console.error(err.message);
+		throw err;
+	}
+}
+
+export default fetchData;
