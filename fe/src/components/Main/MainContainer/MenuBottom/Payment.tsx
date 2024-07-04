@@ -1,5 +1,5 @@
 function Payment() {
-	return <div>결제공간</div>;
+	return <div className="w-[30%]">결제</div>;
 }
 
 export default Payment;

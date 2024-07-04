@@ -1,4 +1,4 @@
-import useGet from "../../../hooks/useGet";
+import useGet from "../../../../hooks/useGet";
 import Menu from "./Menu";
 
 function MenuContainer() {
