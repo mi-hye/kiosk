@@ -5,7 +5,7 @@ const router = express.Router();
 
 // 기존에 있던 라우팅 로직
 router.get("/", (req, res) => {
-	res.send("Welcome to the API");
+	res.send("Welcome to the Kiosk API");
 });
 
 // menus 라우팅을 menus.ts 파일에서 처리
