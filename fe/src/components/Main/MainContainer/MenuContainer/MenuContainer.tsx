@@ -12,7 +12,7 @@ function MenuContainer({ category }: PropsType) {
 		isLoading,
 	} = useGet(
 		`menus?${category}`,
-		`/menus?${category}`,
+		`/menus?category=${category}`,
 		true
 	);
 
