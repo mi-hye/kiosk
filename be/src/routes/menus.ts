@@ -1,7 +1,10 @@
 import express from "express";
 import pool from "../config/db.js"; // MySQL 연결 설정 파일을 import
+import dotenv from "dotenv";
+import { ResultSetHeader } from "mysql2";
 
 const router = express.Router();
+dotenv.config();
 
 // /menus 엔드포인트에서의 GET 요청 처리
 router.get("/", async (req, res) => {
@@ -12,7 +15,6 @@ router.get("/", async (req, res) => {
 		);
 		connection.release();
 		res.json(rows);
-		console.log("잘됨");
 	} catch (error) {
 		console.error("Error querying menus:", error);
 		res
@@ -21,18 +23,19 @@ router.get("/", async (req, res) => {
 	}
 });
 
-// router.post("/", async (req, res) => {
-// 	const { name, explain_text, price, tab, img } = req.body;
-// 	try {
-// 		const [result] = await pool.query(
-// 			"INSERT INTO menus (name, explain_text, price, tab, img) VALUES (?, ?, ?, ?, ?)",
-// 			[name, explain_text, price, tab, img]
-// 		);
-// 		res.status(201).json({ id: result.insertId });
-// 	} catch (err) {
-// 		console.error(err);
-// 		res.status(500).send("Server Error");
-// 	}
-// });
+router.post("/", async (req, res) => {
+	const { name, explainText, price, tab, img } = req.body;
+	const url = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${img}`;
+	try {
+		const [result] = await pool.query<ResultSetHeader>(
+			"INSERT INTO menus (name, explain_text, price, tab, img) VALUES (?, ?, ?, ?, ?)",
+			[name, explainText, price, tab, url]
+		);
+		res.status(200).json({ id: result.insertId, img });
+	} catch (err) {
+		console.error(err);
+		res.status(500).send("Server Error");
+	}
+});
 
 export default router;

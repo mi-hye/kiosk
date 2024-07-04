@@ -1,5 +1,6 @@
 import express from "express";
 import menusRouter from "./menus.js";
+import uploadRouter from "./upload.js";
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ router.get("/", (req, res) => {
 	res.send("Welcome to the Kiosk API");
 });
 
-// menus 라우팅을 menus.ts 파일에서 처리
 router.use("/menus", menusRouter);
+router.use("/upload", uploadRouter);
 
 export default router;
