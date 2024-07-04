@@ -1,14 +1,24 @@
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
+import {
+	QueryClient,
+	QueryClientProvider,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 function App() {
 	return (
-		<div className="w-screen h-screen flex-center">
-			<div className="w-[740px] h-[1000px] bg-color-main rounded-lg">
-				<Header />
-				<Main />
+		<QueryClientProvider client={queryClient}>
+			<div className="w-screen h-screen flex-center">
+				<div className="w-[740px] h-[1000px] bg-color-main rounded-lg">
+					<Header />
+					<Main />
+				</div>
 			</div>
-		</div>
+			<ReactQueryDevtools initialIsOpen={true} />
+		</QueryClientProvider>
 	);
 }
 
