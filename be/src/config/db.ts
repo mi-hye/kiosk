@@ -16,6 +16,7 @@ const pool = mysql.createPool({
 	waitForConnections: true,
 	connectionLimit: 10,
 	queueLimit: 0,
+	decimalNumbers: true, // DECIMAL 타입을 숫자로 가져오도록 설정
 });
 
 export default pool;
