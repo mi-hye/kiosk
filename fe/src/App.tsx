@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className="w-screen h-screen flex-center">
+			<div className="w-screen h-screen flex-center min-h-[1000px] min-w-[700px]">
 				<div className="w-[740px] h-[1000px] bg-color-main rounded-lg">
 					<Header />
 					<Main />
