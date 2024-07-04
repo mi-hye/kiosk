@@ -12,7 +12,7 @@ function MenuContainer() {
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
-		<div className="h-[80%] bg-sky-200 m-3 grid grid-rows-4 grid-cols-4">
+		<div className="h-[80%] m-3 grid grid-rows-4 grid-cols-4">
 			{(menus as Menu[]).map((menu) => (
 				<Menu key={menu.id} menu={menu} />
 			))}
