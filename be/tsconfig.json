@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"rootDir": "./src",
+		"outDir": "./dist", // JavaScript 파일을 저장할 디렉토리 설정
+		"strict": true,
+		"esModuleInterop": true
+	},
+	"include": ["src"]
+}
