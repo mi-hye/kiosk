@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import usePost from "../../hooks/usePost";
 
 interface FormValues {
 	name: string;
@@ -8,28 +9,37 @@ interface FormValues {
 	img: FileList;
 }
 
+const labelStyle =
+	"bg-color-sub text-white rounded-md px-2 py-1";
+
 function Admin() {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm<FormValues>();
-
-	const onSubmit: SubmitHandler<FormValues> = (data) => {
-		console.log(data);
+	const mutate = usePost("/menus", "menus");
+	const onSubmit: SubmitHandler<FormValues> = (
+		data: FormValues
+	) => {
+		mutate({ ...data, img: `/imgs/${data.img[0].name}` });
+		reset();
 	};
 
 	return (
-		<div className="fixed z-50 top-[15%] left-[50%] transform -translate-x-1/2 w-[550px] h-[750px] bg-color-main rounded-lg ">
+		<div className="fixed z-50 top-[15%] left-[50%] transform -translate-x-1/2 w-[550px] h-[750px] bg-color-main rounded-md border-[1px] border-color-sub">
 			<form
 				className="flex flex-col items-center justify-evenly h-full text-sm"
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<div className="flex-evenly w-full">
-					<label htmlFor="name">음료 이름</label>
+					<label className={labelStyle} htmlFor="name">
+						음료 이름
+					</label>
 					<input
 						id="name"
-						className="w-[50%] rounded-lg"
+						className="w-[50%] rounded-md px-2"
 						{...register("name", {
 							required: "Name is required",
 						})}
@@ -37,10 +47,12 @@ function Admin() {
 					{errors.name && <p>{errors.name.message}</p>}
 				</div>
 				<div className="flex-evenly w-full">
-					<label htmlFor="price">음료 가격</label>
+					<label className={labelStyle} htmlFor="price">
+						음료 가격
+					</label>
 					<input
 						id="price"
-						className="w-[50%] rounded-lg"
+						className="w-[50%] rounded-md px-2"
 						{...register("price", {
 							required: "Price is required",
 						})}
@@ -48,10 +60,15 @@ function Admin() {
 					{errors.price && <p>{errors.price.message}</p>}
 				</div>
 				<div className="flex-evenly w-full">
-					<label htmlFor="explainText">음료 설명</label>
+					<label
+						className={labelStyle}
+						htmlFor="explainText"
+					>
+						음료 설명
+					</label>
 					<input
 						id="explainText"
-						className="w-[50%] rounded-lg"
+						className="w-[50%] rounded-md px-2"
 						{...register("explainText", {
 							required: "Explain is required",
 						})}
@@ -61,10 +78,12 @@ function Admin() {
 					)}
 				</div>
 				<div className="flex-evenly w-full">
-					<label htmlFor="tab">메뉴 위치</label>
+					<label className={labelStyle} htmlFor="tab">
+						메뉴 위치
+					</label>
 					<input
 						id="tab"
-						className="w-[50%] rounded-lg"
+						className="w-[50%] rounded-md px-2"
 						{...register("tab", {
 							required: "Tab is required",
 						})}
@@ -72,7 +91,9 @@ function Admin() {
 					{errors.tab && <p>{errors.tab.message}</p>}
 				</div>
 				<div className="flex-evenly w-full">
-					<label htmlFor="img">Image</label>
+					<label className={labelStyle} htmlFor="img">
+						Image
+					</label>
 					<input
 						id="img"
 						type="file"
@@ -84,7 +105,7 @@ function Admin() {
 					{errors.img && <p>{errors.img.message}</p>}
 				</div>
 				<button
-					className="bg-color-sub p-1.5 rounded-md hover:opacity-70 text-white transition-opacity w-[70%]"
+					className="bg-color-sub p-1.5 rounded-md px-2 hover:opacity-70 text-white transition-opacity w-[70%]"
 					type="submit"
 				>
 					Submit
