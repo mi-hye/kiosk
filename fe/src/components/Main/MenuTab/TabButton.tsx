@@ -6,11 +6,10 @@ interface PropsType {
 }
 
 function TabButton({ menu, key }: PropsType) {
-
 	return (
 		<button
 			key={key}
-			className="border-[1px] border-b-0 border-black p-1.5 rounded-t-md "
+			className="border-[1px] border-b-0 border-color-sub p-1.5 rounded-t-md "
 			role="tab"
 			aria-selected="true"
 			aria-controls="panel1"

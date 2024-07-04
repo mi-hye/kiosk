@@ -1,13 +1,20 @@
 import { useState } from "react";
 import TabButton from "./TabButton";
 
-const MENU = ["커피", "라떼", "에이드", "티", "프라페"];
+const MENU = [
+	"신메뉴",
+	"커피",
+	"라떼",
+	"에이드",
+	"티",
+	"프라페",
+];
 
 function MenuTab() {
 	const [isSelected, setIsSelected] = useState(false);
 
 	const handleSelected = () => setIsSelected(!isSelected);
-  
+
 	return (
 		<div
 			className="w-full flex items-end text-sm"
