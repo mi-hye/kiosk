@@ -1,10 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import usePost from "../../hooks/usePost";
+import handleUploadImg from "../../utility/uploadFile";
 
 interface FormValues {
 	name: string;
 	explainText: string;
-	price: number;
+	price: string;
 	tab: string;
 	img: FileList;
 }
@@ -20,15 +21,17 @@ function Admin() {
 		reset,
 	} = useForm<FormValues>();
 	const mutate = usePost("/menus", "menus");
-	const onSubmit: SubmitHandler<FormValues> = (
+	const onSubmit: SubmitHandler<FormValues> = async (
 		data: FormValues
 	) => {
-		mutate({ ...data, img: `/imgs/${data.img[0].name}` });
+		const { img } = data;
+		await handleUploadImg(img[0]);
+		mutate({ ...data, img: img[0].name });
 		reset();
 	};
 
 	return (
-		<div className="fixed z-50 top-[15%] left-[50%] transform -translate-x-1/2 w-[550px] h-[750px] bg-color-main rounded-md border-[1px] border-color-sub">
+		<div className="fixed z-50 top-[15%] left-[50%] transform -translate-x-1/2 w-[500px] h-[470px] bg-color-main rounded-md border-[1px] border-color-sub">
 			<form
 				className="flex flex-col items-center justify-evenly h-full text-sm"
 				onSubmit={handleSubmit(onSubmit)}
@@ -79,7 +82,7 @@ function Admin() {
 				</div>
 				<div className="flex-evenly w-full">
 					<label className={labelStyle} htmlFor="tab">
-						메뉴 위치
+						카테고리
 					</label>
 					<input
 						id="tab"
@@ -92,9 +95,10 @@ function Admin() {
 				</div>
 				<div className="flex-evenly w-full">
 					<label className={labelStyle} htmlFor="img">
-						Image
+						사진
 					</label>
 					<input
+						className="w-[45%]"
 						id="img"
 						type="file"
 						accept=".jpg, .jpeg, .png"
