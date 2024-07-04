@@ -8,10 +8,11 @@ dotenv.config();
 
 // /menus 엔드포인트에서의 GET 요청 처리
 router.get("/", async (req, res) => {
+	const category = req.query.category;
 	try {
 		const connection = await pool.getConnection();
 		const [rows] = await connection.query(
-			"SELECT * FROM menus"
+			`SELECT * FROM menus WHERE tab = "${category}"`
 		);
 		connection.release();
 		res.json(rows);
