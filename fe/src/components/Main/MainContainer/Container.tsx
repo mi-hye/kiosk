@@ -1,14 +1,10 @@
 import MenuContainer from "./MenuContainer/MenuContainer";
 import MenuBottom from "./MenuBottom/MenuBottom";
 
-interface PropsType {
-	category: string;
-}
-
-function Container({ category }: PropsType) {
+function Container() {
 	return (
 		<div className="w-full h-[93%] border-[1px] border-color-sub rounded-b-md rounded-tr-md overflow-hidden">
-			<MenuContainer category={category}/>
+			<MenuContainer/>
 			<MenuBottom />
 		</div>
 	);

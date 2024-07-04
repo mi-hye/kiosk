@@ -1,14 +1,13 @@
+import { useContext } from "react";
+import { CategoryContext } from "../../../provider/CategoryProvider";
+
 interface PropsType {
 	menu: string;
-	category: string;
-	setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function TabButton({
-	menu,
-	category,
-	setCategory,
-}: PropsType) {
+function TabButton({ menu }: PropsType) {
+	const [category, setCategory] =
+		useContext(CategoryContext);
 	const handleSelected = () => setCategory(menu);
 	return (
 		<button

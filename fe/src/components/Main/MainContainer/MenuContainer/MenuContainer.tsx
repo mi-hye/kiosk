@@ -1,11 +1,10 @@
+import { useContext } from "react";
 import useGet from "../../../../hooks/useGet";
 import Menu from "./Menu";
+import { CategoryContext } from "../../../../provider/CategoryProvider";
 
-interface PropsType {
-	category: string;
-}
-
-function MenuContainer({ category }: PropsType) {
+function MenuContainer() {
+	const [category] = useContext(CategoryContext);
 	const {
 		data: menus,
 		error,
