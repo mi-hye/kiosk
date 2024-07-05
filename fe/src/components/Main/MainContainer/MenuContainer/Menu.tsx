@@ -6,8 +6,9 @@ interface PropsType {
 }
 
 function Menu({ menu }: PropsType) {
-	const [, dispatch] = useContext(CartContext);
+	const [state, dispatch] = useContext(CartContext);
 	const handleAddCart = () => {
+		if (state.cart.includes(menu)) return;
 		dispatch({ type: "ADD_CART", payload: menu });
 	};
 	return (
