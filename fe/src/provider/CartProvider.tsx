@@ -21,11 +21,16 @@ function reducer(
 	action: Action
 ): CartState {
 	switch (action.type) {
-		case "ADD_CART":
+		case "ADD_CART": {
+			const newState = [...state.cart, action.payload];
 			return {
-				cart: [...state.cart, action.payload],
-				totalPrice: 0,
+				cart: newState,
+				totalPrice: newState.reduce(
+					(prev, curr) => (prev += curr.price),
+					0
+				),
 			};
+		}
 		// case "subtract_CART":
 		// 	return { activeTotal: false, clickTotal: false, countCheckBox: state.countCheckBox + 1 };
 		// case "MINUS_COUNT":
