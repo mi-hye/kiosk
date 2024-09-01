@@ -1,2 +1,3 @@
 # kiosk
-카페노노 개발자 실전테스트 키오스크
+
+[노션 링크](https://www.notion.so/mihye-/c249de5cf3a146a0952dabca780a0d15)
